@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>눈치 100단 선물 추천소 🎁</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ═══ 1. 첫 화면 (인트로) ═══ -->
+    <section id="screen-intro" class="screen active">
+      <div class="intro-screen">
+        <div class="intro-emoji">🎁</div>
+        <h1 class="intro-title">눈치 100단<br>선물 추천소</h1>
+        <p class="intro-desc">뭘 사야 할지 고민될 때,<br>실패 없는 센스 만점 선물 큐레이터</p>
+        <div class="intro-features">
+          <span class="intro-feature">💰 예산 맞춤</span>
+          <span class="intro-feature">💝 관계 분석</span>
+          <span class="intro-feature">🎯 취향 저격</span>
+        </div>
+        <button class="btn-primary" id="btn-start" type="button">선물 고르러 가기 ✨</button>
+      </div>
+    </section>
+
+    <!-- ═══ 2. 입력 화면 ═══ -->
+    <section id="screen-input" class="screen">
+      <header class="input-header">
+        <h2>🎀 선물 정보 입력</h2>
+        <p>코치 언니에게 선물 받을 상대방 정보를 알려줘!</p>
+      </header>
+
+      <!-- 예산 슬라이더 -->
+      <div class="card" id="card-budget">
+        <div class="card-label"><span class="emoji">💰</span> 선물 예산</div>
+        <div class="budget-display">
+          <span class="budget-amount" id="budget-value">5</span><span class="budget-unit">만 원</span>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" id="budget-slider" min="1" max="20" value="5" step="1">
+          <div class="slider-labels">
+            <span>1만 원</span>
+            <span>20만 원</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상대와의 관계 (어색한 사이 포함) -->
+      <div class="card" id="card-relation">
+        <div class="card-label"><span class="emoji">👫</span> 상대와의 관계</div>
+        <div class="option-grid">
+          <button type="button" class="option-btn" data-group="relation" data-value="썸·연인">
+            <span class="btn-emoji">💕</span>썸·연인
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="찐친">
+            <span class="btn-emoji">👯</span>찐친
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="선배·동료">
+            <span class="btn-emoji">🤝</span>선배·동료
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="부모님·가족">
+            <span class="btn-emoji">👨‍👩‍👧</span>부모님·가족
+          </button>
+          <button type="button" class="option-btn full-width" data-group="relation" data-value="어색한 사이">
+            <span class="btn-emoji">😅</span>어색한 사이
+          </button>
+        </div>
+      </div>
+
+      <!-- 상대방 취향 (모름·상관없음 포함) -->
+      <div class="card" id="card-taste">
+        <div class="card-label"><span class="emoji">🎯</span> 상대방 취향</div>
+        <div class="option-grid">
+          <button type="button" class="option-btn" data-group="taste" data-value="실용주의">
+            <span class="btn-emoji">🛠️</span>실용주의
+          </button>
+          <button type="button" class="option-btn" data-group="taste" data-value="감성파">
+            <span class="btn-emoji">🌙</span>감성파
+          </button>
+          <button type="button" class="option-btn" data-group="taste" data-value="먹보·미식가">
+            <span class="btn-emoji">🍰</span>먹보·미식가
+          </button>
+          <button type="button" class="option-btn" data-group="taste" data-value="집돌이·집순이">
+            <span class="btn-emoji">🏠</span>집돌이·집순이
+          </button>
+          <button type="button" class="option-btn full-width" data-group="taste" data-value="모름·상관없음">
+            <span class="btn-emoji">🤷</span>모름, 상관없음
+          </button>
+        </div>
+      </div>
+
+      <!-- 선물 상황 -->
+      <div class="card" id="card-occasion">
+        <div class="card-label"><span class="emoji">🎉</span> 선물 상황</div>
+        <div class="option-grid">
+          <button type="button" class="option-btn" data-group="occasion" data-value="생일·기념일">
+            <span class="btn-emoji">🎂</span>생일·기념일
+          </button>
+          <button type="button" class="option-btn" data-group="occasion" data-value="가벼운 감사·응원">
+            <span class="btn-emoji">🙏</span>가벼운 감사·응원
+          </button>
+          <button type="button" class="option-btn" data-group="occasion" data-value="집들이·축하">
+            <span class="btn-emoji">🏡</span>집들이·축하
+          </button>
+          <button type="button" class="option-btn" data-group="occasion" data-value="사과·화해">
+            <span class="btn-emoji">🕊️</span>사과·화해
+          </button>
+          <button type="button" class="option-btn full-width" data-group="occasion" data-value="마니또 선물">
+            <span class="btn-emoji">🎅</span>마니또 선물
+          </button>
+        </div>
+      </div>
+
+      <!-- 미선택 항목 안내 메시지 -->
+      <div id="validation-msg" class="validation-msg"></div>
+
+      <div class="submit-area">
+        <button class="btn-primary" id="btn-submit" type="button">찰떡 선물 추천받기! 🎁</button>
+      </div>
+    </section>
+
+    <!-- ═══ 3. 결과 화면 ═══ -->
+    <section id="screen-result" class="screen">
+      <header class="result-header">
+        <h2>🎁 코치 언니의 추천 결과</h2>
+        <p>상황에 꼭 맞는 찰떡 선물로 골라왔어 ✨</p>
+      </header>
+
+      <!-- 선택된 태그 요약 -->
+      <div class="selected-tags" id="result-tags"></div>
+
+      <!-- 1. 코치 언니 센스 멘트 -->
+      <div class="result-card">
+        <div class="coach-label">👩‍🦰 코치 언니의 비밀 코칭</div>
+        <div class="coach-bubble" id="coach-ment"></div>
+      </div>
+
+      <!-- 2. 오늘의 베스트 추천 선물 (강조 카드) -->
+      <div class="gift-highlight">
+        <span class="gift-badge">BEST 찰떡 아이템</span>
+        <span class="gift-emoji" id="gift-emoji">🎁</span>
+        <h3 class="gift-name" id="gift-name">추천 선물</h3>
+        <span class="gift-price" id="gift-price">예산대</span>
+      </div>
+
+      <!-- 3. 절대 피해야 할 지뢰 선물 🚫 -->
+      <div class="mine-card">
+        <div class="mine-title">🚫 절대 피해야 할 지뢰 선물!</div>
+        <div class="mine-item" id="mine-item">피해야 할 아이템</div>
+        <p class="mine-text" id="mine-text">경고 이유</p>
+      </div>
+
+      <!-- 4. 추천 이유 & 건넬 때 한마디 -->
+      <div class="result-card reason-card">
+        <div class="result-card-title">💡 왜 이 선물이 찰떡일까?</div>
+        <p class="reason-text" id="reason-text">추천 이유</p>
+        <div class="ment-box">
+          <span class="ment-label">💌 선물 건넬 때 센스 멘트 1줄 (쪽지/카톡 추천)</span>
+          <span id="gift-ment">"멘트"</span>
+        </div>
+      </div>
+
+      <!-- 5. 다시 골라보기 버튼 -->
+      <div class="retry-area">
+        <button class="btn-secondary" id="btn-retry" type="button">다시 골라보기 🔄</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- 로딩 오버레이 -->
+  <div class="loading-overlay" id="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">코치 언니가 찰떡 선물 고민 중... 🎀</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
